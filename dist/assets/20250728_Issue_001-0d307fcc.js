@@ -1,10 +1,10 @@
----
+const n=`---
 title: "삼성 파운드리 × 테슬라 AI칩 공급계약"
 excerpt: "사상 최대 규모(22.8조원) 테슬라 장기 수주로 삼성 파운드리가 글로벌 경쟁 구도의 전환점을 맞다."
 category: "AI Macro Newsletter"
 date: "2025-07-28"
 readTime: "8분"
-slug: "20250728_Issue_001"
+slug: "samsung-foundry-tesla-supply"
 author: "Ark Insights"
 tags: ["삼성전자", "파운드리", "테슬라", "반도체", "AI칩", "글로벌경제"]
 image: "/images/newsletters/issue004.jpg"
@@ -106,3 +106,4 @@ Tesla와 삼성전자가 약 22.8조원($16.5bn) 규모의 장기 공급 계약�
 © 2025 **Ark Insights** | Written with ChatGPT-assisted workflow  
 Feedback & topic requests → hello@ark-insights.io  
 _Unsubscribe · Archive_
+`;export{n as default};
