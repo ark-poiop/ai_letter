@@ -60,18 +60,24 @@ function markdownToHtml(markdown: string): string {
   let html = markdown;
   
   // 표 처리 (가장 먼저 처리)
-  html = html.replace(/\|(.+)\|/g, (match, content) => {
-    const cells = content.split('|').map(cell => cell.trim());
-    const cellHtml = cells.map(cell => `<td>${cell}</td>`).join('');
-    return `<tr>${cellHtml}</tr>`;
-  });
-  
-  // 표 헤더 구분선 제거
-  html = html.replace(/\|[\s\-:|]+\|/g, '');
-  
-  // 연속된 tr 태그를 table로 감싸기
-  html = html.replace(/(<tr>.*?<\/tr>)+/gs, (match) => {
-    return `<table class="markdown-table">${match}</table>`;
+  const tableRegex = /(\|.*\|[\r\n]+)+/g;
+  html = html.replace(tableRegex, (tableMatch) => {
+    const lines = tableMatch.trim().split('\n').filter(line => line.trim());
+    let tableHtml = '<table class="markdown-table">';
+    
+    lines.forEach((line, index) => {
+      // 헤더 구분선 건너뛰기
+      if (line.match(/^\|[\s\-:|]+\|$/)) {
+        return;
+      }
+      
+      const cells = line.split('|').slice(1, -1).map(cell => cell.trim());
+      const cellHtml = cells.map(cell => `<td>${cell}</td>`).join('');
+      tableHtml += `<tr>${cellHtml}</tr>`;
+    });
+    
+    tableHtml += '</table>';
+    return tableHtml;
   });
   
   // 헤더

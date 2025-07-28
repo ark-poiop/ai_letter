@@ -116,6 +116,7 @@
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    table-layout: fixed;
   }
 
   .markdown-table tr {
@@ -140,6 +141,9 @@
     color: rgba(255, 255, 255, 0.9);
     border-right: 1px solid rgba(255, 255, 255, 0.05);
     position: relative;
+    vertical-align: top;
+    word-wrap: break-word;
+    white-space: normal;
   }
 
   .markdown-table td:last-child {
@@ -149,6 +153,7 @@
   .markdown-table tr:first-child td {
     @apply font-bold text-blue-300;
     text-shadow: 0 0 10px rgba(66, 165, 245, 0.3);
+    vertical-align: middle;
   }
 
   .markdown-table tr:nth-child(even):not(:first-child) {
@@ -178,6 +183,7 @@
   @media (max-width: 768px) {
     .markdown-table {
       @apply text-xs;
+      table-layout: auto;
     }
     
     .markdown-table td {
