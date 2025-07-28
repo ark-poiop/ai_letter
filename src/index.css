@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CI 가이드라인 기반 색상 팔레트 */
+@layer base {
+  :root {
+    /* Primary Colors */
+    --primary-blue: #42a5f5;
+    --primary-blue-dark: #1e88e5;
+    --primary-blue-darker: #0d47a1;
+    
+    /* Background Colors */
+    --bg-dark: #0a0a0a;
+    --bg-dark-secondary: #1a1a1a;
+    
+    /* Text Colors */
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0bec5;
+    --text-muted: #78909c;
+    
+    /* Accent Colors */
+    --accent-overlay: rgba(66, 165, 245, 0.1);
+    --accent-overlay-light: rgba(66, 165, 245, 0.03);
+    
+    /* Border Colors */
+    --border-light: rgba(255, 255, 255, 0.1);
+    --border-accent: rgba(66, 165, 245, 0.3);
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-gray-900 via-black to-gray-900;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary-blue);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-blue-dark);
+  }
+}
+
+/* CI 기반 컴포넌트 스타일 */
+@layer components {
+  .ci-card {
+    @apply bg-white/5 border border-white/10 rounded-xl backdrop-blur-sm;
+    transition: all 0.3s ease;
+  }
+
+  .ci-card:hover {
+    @apply border-blue-500/30 transform -translate-y-1;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .ci-gradient-text {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 50%, var(--primary-blue-darker) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .ci-glow {
+    animation: ci-glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes ci-glow {
+    from { filter: drop-shadow(0 0 20px rgba(66, 165, 245, 0.3)); }
+    to { filter: drop-shadow(0 0 30px rgba(66, 165, 245, 0.5)); }
+  }
+
+  .ci-float {
+    animation: ci-float 6s ease-in-out infinite;
+  }
+
+  @keyframes ci-float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+    50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+  }
+
+  .ci-button {
+    @apply bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold rounded-lg transition-all duration-300;
+    box-shadow: 0 4px 15px rgba(66, 165, 245, 0.3);
+  }
+
+  .ci-button:hover {
+    box-shadow: 0 8px 25px rgba(66, 165, 245, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .ci-input {
+    @apply bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all;
+  }
+
+  .ci-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-400 border border-blue-500/30;
+  }
+}
