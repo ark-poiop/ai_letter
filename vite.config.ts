@@ -20,7 +20,4 @@ export default defineConfig({
     }
   },
   assetsInclude: ['**/*.md'], // 마크다운 파일을 에셋으로 포함
-  optimizeDeps: {
-    include: ['gray-matter', 'remark', 'remark-html', 'remark-gfm']
-  }
 })
