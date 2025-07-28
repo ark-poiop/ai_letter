@@ -4,7 +4,7 @@ excerpt: "사상 최대 규모(22.8조원) 테슬라 장기 수주로 삼성 파
 category: "AI Macro Newsletter"
 date: "2025-07-28"
 readTime: "8분"
-slug: "samsung-foundry-tesla-supply"
+slug: "20250728_Issue_001"
 author: "Ark Insights"
 tags: ["삼성전자", "파운드리", "테슬라", "반도체", "AI칩", "글로벌경제"]
 image: "/images/newsletters/issue004.jpg"
