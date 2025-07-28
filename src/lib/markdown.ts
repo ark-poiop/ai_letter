@@ -57,23 +57,47 @@ function parseFrontmatter(content: string): { frontmatter: any, markdown: string
 
 // 간단한 마크다운을 HTML로 변환
 function markdownToHtml(markdown: string): string {
-  return markdown
-    // 헤더
+  let html = markdown;
+  
+  // 표 처리 (가장 먼저 처리)
+  html = html.replace(/\|(.+)\|/g, (match, content) => {
+    const cells = content.split('|').map(cell => cell.trim());
+    const cellHtml = cells.map(cell => `<td>${cell}</td>`).join('');
+    return `<tr>${cellHtml}</tr>`;
+  });
+  
+  // 표 헤더 구분선 제거
+  html = html.replace(/\|[\s\-:|]+\|/g, '');
+  
+  // 연속된 tr 태그를 table로 감싸기
+  html = html.replace(/(<tr>.*?<\/tr>)+/gs, (match) => {
+    return `<table class="markdown-table">${match}</table>`;
+  });
+  
+  // 헤더
+  html = html
     .replace(/^### (.*$)/gim, '<h3>$1</h3>')
     .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-    // 굵은 텍스트
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    // 기울임 텍스트
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    // 링크
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-    // 줄바꿈
-    .replace(/\n/g, '<br>')
-    // 단락
-    .replace(/<br><br>/g, '</p><p>')
-    .replace(/^(.+)$/gm, '<p>$1</p>')
-    .replace(/<p><\/p>/g, '');
+    .replace(/^# (.*$)/gim, '<h1>$1</h1>');
+  
+  // 굵은 텍스트
+  html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  
+  // 기울임 텍스트
+  html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+  
+  // 링크
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  
+  // 줄바꿈 (표 내부가 아닌 경우에만)
+  html = html.replace(/(?<!<td>.*)\n(?!.*<\/td>)/g, '<br>');
+  
+  // 단락 (표가 아닌 경우에만)
+  html = html.replace(/(?<!<table>.*)<br><br>(?!.*<\/table>)/g, '</p><p>');
+  html = html.replace(/(?<!<table>.*)^(.+)$(?!.*<\/table>)/gm, '<p>$1</p>');
+  html = html.replace(/<p><\/p>/g, '');
+  
+  return html;
 }
 
 export async function parseMarkdownFile(markdownContent: string): Promise<Post> {

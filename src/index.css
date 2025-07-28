@@ -109,4 +109,34 @@
   .ci-badge {
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-400 border border-blue-500/30;
   }
+
+  /* 마크다운 표 스타일 */
+  .markdown-table {
+    @apply w-full border-collapse border border-gray-600 rounded-lg overflow-hidden my-6;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .markdown-table tr {
+    @apply border-b border-gray-600;
+  }
+
+  .markdown-table tr:last-child {
+    @apply border-b-0;
+  }
+
+  .markdown-table td {
+    @apply px-4 py-3 text-sm text-gray-300 border-r border-gray-600;
+  }
+
+  .markdown-table td:last-child {
+    @apply border-r-0;
+  }
+
+  .markdown-table tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .markdown-table tr:hover {
+    background: rgba(66, 165, 245, 0.1);
+  }
 }
