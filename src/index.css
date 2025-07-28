@@ -110,14 +110,25 @@
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-400 border border-blue-500/30;
   }
 
-  /* 마크다운 표 스타일 */
+  /* 마크다운 표 스타일 - 현대적 디자인 */
   .markdown-table {
-    @apply w-full border-collapse border border-gray-600 rounded-lg overflow-hidden my-6;
-    background: rgba(255, 255, 255, 0.05);
+    @apply w-full border-collapse rounded-xl overflow-hidden my-8 shadow-2xl;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .markdown-table tr {
-    @apply border-b border-gray-600;
+    @apply transition-all duration-300;
+  }
+
+  .markdown-table tr:first-child {
+    background: linear-gradient(135deg, rgba(66, 165, 245, 0.15) 0%, rgba(66, 165, 245, 0.05) 100%);
+    border-bottom: 2px solid rgba(66, 165, 245, 0.3);
+  }
+
+  .markdown-table tr:not(:first-child) {
+    @apply border-b border-gray-700/50;
   }
 
   .markdown-table tr:last-child {
@@ -125,18 +136,52 @@
   }
 
   .markdown-table td {
-    @apply px-4 py-3 text-sm text-gray-300 border-r border-gray-600;
+    @apply px-6 py-4 text-sm font-medium;
+    color: rgba(255, 255, 255, 0.9);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
   }
 
   .markdown-table td:last-child {
     @apply border-r-0;
   }
 
-  .markdown-table tr:nth-child(even) {
+  .markdown-table tr:first-child td {
+    @apply font-bold text-blue-300;
+    text-shadow: 0 0 10px rgba(66, 165, 245, 0.3);
+  }
+
+  .markdown-table tr:nth-child(even):not(:first-child) {
     background: rgba(255, 255, 255, 0.02);
   }
 
-  .markdown-table tr:hover {
-    background: rgba(66, 165, 245, 0.1);
+  .markdown-table tr:hover:not(:first-child) {
+    background: linear-gradient(135deg, rgba(66, 165, 245, 0.1) 0%, rgba(66, 165, 245, 0.05) 100%);
+    transform: translateX(4px);
+    box-shadow: inset 0 0 20px rgba(66, 165, 245, 0.1);
+  }
+
+  .markdown-table tr:hover td {
+    color: rgba(255, 255, 255, 1);
+  }
+
+  /* 표 셀 내부 강조 */
+  .markdown-table td strong {
+    @apply text-blue-400 font-semibold;
+  }
+
+  .markdown-table td em {
+    @apply text-green-400 italic;
+  }
+
+  /* 표 반응형 */
+  @media (max-width: 768px) {
+    .markdown-table {
+      @apply text-xs;
+    }
+    
+    .markdown-table td {
+      @apply px-3 py-2;
+    }
   }
 }
