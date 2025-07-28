@@ -25,14 +25,10 @@ async function loadMarkdownFiles(): Promise<Post[]> {
   }
 }
 
-// 기존 하드코딩된 포스트와 마크다운 포스트를 결합하는 함수
+// 마크다운 포스트를 가져오는 함수
 export async function getAllPosts(): Promise<Post[]> {
   try {
     const markdownPosts = await loadMarkdownFiles();
-    
-    // 기존 하드코딩된 포스트들도 포함 (필요한 경우)
-    // const hardcodedPosts = await import('../data/posts').then(m => m.default);
-    
     return markdownPosts;
   } catch (error) {
     console.error('Error getting all posts:', error);
